@@ -8,6 +8,7 @@ import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
+const { Navigator, Screen } = createStackNavigator();
 const MyTabs = createBottomTabNavigator();
 
 const AppTabsScreen = () => (
@@ -20,16 +21,16 @@ const AppTabsScreen = () => (
             component={DeckList}
             options={{
                 tabBarLabel: 'Deck List',
-                tabBarIcon: ({ color }) => <Ionicons name='ios-bookmarks' size={30} color={color} />
+                tabBarIcon: ({ color }) => <Ionicons name='ios-bookmarks' size={20} color={color} />
             }}
 
         />
         <MyTabs.Screen
-            name='AddDeck'
+            name='DeckDetail'
             component={DeckDetail}
             options={{
                 tabBarLabel: 'DeckDetail',
-                tabBarIcon: ({ color }) => <FontAwesome name='plus-square' size={30} color={color} />
+                tabBarIcon: ({ color }) => <FontAwesome name='plus-square' size={20} color={color} />
             }}
         />
 
@@ -38,25 +39,34 @@ const AppTabsScreen = () => (
     </MyTabs.Navigator>
 )
 
-const MyStacks = createStackNavigator()
+//const MyStacks = createStackNavigator()
+
 
 const AppStackScreen = () => (
-    <MyStacks.Navigator
+    <Navigator
         screenOptions={{
             headerTintColor: white,
             headerStyle: { backgroundColor: blue },
             headerTitleAlign: 'center'
         }}
     >
-        <MyStacks.Screen
+
+        <Screen
             name='AppTabsScreen'
             component={AppTabsScreen}
-            // Options for my screen
             options={() => ({
                 headerShown: false,
             })}
         />
-        <MyStacks.Screen
+
+        <Screen
+            name='DeckList'
+            component={DeckList}
+            options={() => ({
+                headerTitle: `Deck List`,
+            })}
+        />
+        <Screen
             name='DeckDetail'
             component={DeckDetail}
             options={() => ({
@@ -64,15 +74,11 @@ const AppStackScreen = () => (
 
             })}
         />
-        <MyStacks.Screen
-            name='DeckList'
-            component={DeckList}
-            options={() => ({
-                headerTitle: `Deck List`,
-            })}
-        />
 
-    </MyStacks.Navigator>
+
+
+
+    </Navigator>
 )
 
 

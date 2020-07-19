@@ -9,12 +9,21 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 
-//const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator();
 export default function App() {
   return (
-
-    <Navigation/>
-
+     < <NavigationContainer>
+        <Navigator>
+          <Screen
+              name="Home"
+              options={{ title: "Deck List" }}
+              component={DeckList}
+          />
+          <Screen name="Details"
+                  options={{ title: "Deck Detail" }}
+                  component={DeckDetail} />
+        </Navigator>
+      </NavigationContainer>
   );
 }
 
@@ -26,5 +35,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-
