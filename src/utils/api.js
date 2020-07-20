@@ -1,19 +1,18 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import { decks } from './data'
 
-export const MOBILE_FLASHCARDS_KEY = 'MobileFlashCards'
+export const FLASHCARDS_KEY = 'FlashCards'
 
 export async function getDecks() {
     try {
-        const results = await AsyncStorage.getItem(MOBILE_FLASHCARDS_KEY)
+        const results = await AsyncStorage.getItem(FLASHCARDS_KEY)
 
         if (results === null) {
-            // I need to stringify data before storing them
-            AsyncStorage.setItem(MOBILE_FLASHCARDS_KEY, JSON.stringify(decks))
+
+            AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(decks))
         }
 
         return results === null ? decks : JSON.parse(results)
-        // at first results will be null and Ill get the data directly
 
     } catch (err) {
         console.log('Error Retrieving Data ', err)
@@ -23,7 +22,7 @@ export async function getDecks() {
 
 export async function getDeck(id) {
     try {
-        const results = await AsyncStorage.getItem(MOBILE_FLASHCARDS_KEY)
+        const results = await AsyncStorage.getItem(FLASHCARDS_KEY)
 
         if (results !== null) {
             return JSON.parse(results)[id]
@@ -36,7 +35,7 @@ export async function getDeck(id) {
 
 export async function saveDeckTitle(title) {
     try {
-        await AsyncStorage.mergeItem(MOBILE_FLASHCARDS_KEY, JSON.stringify({
+        await AsyncStorage.mergeItem(FLASHCARDS_KEY, JSON.stringify({
             [title]: {
                 title: title,
                 questions: []
@@ -51,7 +50,7 @@ export async function addCardToDeck(card, title) {
     try {
         const deck = await getDeck(title)
 
-        await AsyncStorage.mergeItem(MOBILE_FLASHCARDS_KEY, JSON.stringify({
+        await AsyncStorage.mergeItem(FLASHCARDS_KEY, JSON.stringify({
             [title]: {
                 questions: [
                     ...deck.questions,
@@ -67,15 +66,15 @@ export async function addCardToDeck(card, title) {
 
 export async function removeDeck(title) {
     try {
-        const decks = await AsyncStorage.getItem(MOBILE_FLASHCARDS_KEY)
+        const decks = await AsyncStorage.getItem(FLASHCARDS_KEY)
 
         const data = JSON.parse(decks)
 
         data[title] = undefined
         delete data[title]
 
-        AsyncStorage.setItem(MOBILE_FLASHCARDS_KEY, JSON.stringify(data))
+        AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(data))
     } catch (err) {
         console.log(`Error removig deck ${title} `, err)
     }
-} 
+}
