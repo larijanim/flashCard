@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import DeckList from '../components/DeckList'
 import DeckDetail from '../components/DeckDetail'
-import DeckAdd from "../components/DeckAdd";
+import DeckNew from "../components/DeckNew";
 
 
 
@@ -21,7 +21,7 @@ const ListStackScreen = () => (
             name='DeckList'
             component={DeckList}
             options={() => ({
-                headerTitle: `Deck List`,
+                headerTitle: `Flash Card `,
             })}
         />
         <ListStack.Screen
@@ -35,15 +35,15 @@ const ListStackScreen = () => (
 );
 
 
-const AddDeckStackScreen= () => (
+const NewDeckStackScreen= () => (
     <AddStack.Navigator
 
     >
         <AddStack.Screen
-            name='AddDeck'
-            component={DeckAdd}
+            name='NewDeck'
+            component={DeckNew}
             options={() => ({
-                headerTitle: `Deck Add`,
+                headerTitle: `New Deck`,
             })}
         />
     </AddStack.Navigator>
@@ -64,8 +64,8 @@ const AppTabsScreen = () => (
 
         />
         <MyTabs.Screen
-            name='AddDeck'
-            component={AddDeckStackScreen}
+            name='NewDeck'
+            component={NewDeckStackScreen}
 
         />
 
