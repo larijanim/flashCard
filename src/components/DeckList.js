@@ -5,24 +5,24 @@ import {StatusBar} from "expo-status-bar";
 import { Button } from 'react-native';
 
 
-
 class DeckList extends Component {
     render() {
 
         return (
             <View style={styles.container}>
 
+
                 <Text
                     onPress={() =>
                     this.props.navigation.navigate("DeckDetail")
-                }>Click to see detail </Text>
+                }>Click to see detailver1 </Text>
                 <Text
                     onPress={() =>
                         this.props.navigation.navigate("DeckDetail")
-                    }>Click to Add Deck</Text>
+                    }>Click to detail ver2 </Text>
                 <Button
-                    title={`Go to DeckDetail`}
-                    onPress={() => this.props.navigation.navigate("DeckDetail")
+                    title={`Button Go to DeckDetail`}
+                    onPress={() => this.props.navigation.push("DeckDetail")
                     }/>
             </View>
         );

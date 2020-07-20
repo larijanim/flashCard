@@ -3,10 +3,10 @@ import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { blue, white } from './utils/colors'
-import DeckList from './components/DeckList'
-import DeckDetail from './components/DeckDetail'
-import { Ionicons, FontAwesome } from '@expo/vector-icons'
+import { blue, white } from '../utils/colors'
+import DeckList from '../components/DeckList'
+import DeckDetail from '../components/DeckDetail'
+import { Ionicons } from '@expo/vector-icons'
 
 const { Navigator, Screen } = createStackNavigator();
 const MyTabs = createBottomTabNavigator();
@@ -30,7 +30,7 @@ const AppTabsScreen = () => (
             component={DeckDetail}
             options={{
                 tabBarLabel: 'DeckDetail',
-                tabBarIcon: ({ color }) => <FontAwesome name='plus-square' size={20} color={color} />
+                tabBarIcon: ({ color }) => <Ionicons name='ios-bookmarks' size={20} color={color} />
             }}
         />
 
@@ -60,7 +60,7 @@ const AppStackScreen = () => (
         />
 
         <Screen
-            name='DeckList'
+            name='Home'
             component={DeckList}
             options={() => ({
                 headerTitle: `Deck List`,

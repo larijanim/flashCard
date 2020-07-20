@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import DeckList from "./src/components/DeckList"
 import DeckDetail from "./src/components/DeckDetail";
 import {blue} from "./src/utils/colors";
-import Navigation from "./src/Navigation";
+import Navigation from "./src/setting/NavSet";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -13,7 +13,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 export default function App() {
   return (
 
-    <Navigation/>
+    <Navigation style={styles.container}/>
 
   );
 }

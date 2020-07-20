@@ -4,12 +4,12 @@ import {blue} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
 
 
-class DeckDetail extends Component {
+class DeckAdd extends Component {
     render() {
         return (
             <View style={styles.container}>
 
-                <Text>you are in DeckDetail</Text>
+                <Text>you are in DeckAdd</Text>
             </View>
         );
     }
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DeckDetail;
+export default DeckAdd;
