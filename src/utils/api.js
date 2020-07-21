@@ -1,7 +1,8 @@
-import AsyncStorage from '@react-native-community/async-storage'
+import {AsyncStorage} from 'react-native'
 import { decks } from './data'
+import {generateId} from "./helpers";
 
-export const FLASHCARDS_KEY = 'FlashCards'
+export const FLASHCARDS_KEY = '@FlashCardsStorage'
 
 export async function getDecks() {
     try {
@@ -33,48 +34,56 @@ export async function getDeck(id) {
     }
 }
 
-export async function saveDeckTitle(title) {
-    try {
-        await AsyncStorage.mergeItem(FLASHCARDS_KEY, JSON.stringify({
-            [title]: {
-                title: title,
-                questions: []
-            }
-        }))
-    } catch (err) {
-        console.log(`Error saving title ${title} `, err)
-    }
-}
-
-export async function addCardToDeck(card, title) {
-    try {
-        const deck = await getDeck(title)
-
-        await AsyncStorage.mergeItem(FLASHCARDS_KEY, JSON.stringify({
-            [title]: {
-                questions: [
-                    ...deck.questions,
-                    card
-                ]
-
-            }
-        }))
+export  function saveDeckAPI(title ) {
+    try{ getDecks()
+        .then((decks) => {
+            return {
+                ...decks,
+                       [title]: {
+                       id: generateId(),
+                       title,
+                      questions: [],}
+                }
+        })
+        .then((newDecks) => {
+            AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(newDecks))
+        })
     } catch (err) {
         console.log(`Error add card ${card} `, err)
     }
 }
 
-export async function removeDeck(title) {
+export async function addCardAPI(title, card) {
     try {
-        const decks = await AsyncStorage.getItem(FLASHCARDS_KEY)
+        getDecks()
+            .then((decks) =>{
+                return{
+                    ...decks,
+                    [title]:{
+                        questions: decks[title].questions.concat([card])
+                    }
+                }
+            })
+            .then((newDecks) =>{
+                AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(newDecks))
+            })
 
-        const data = JSON.parse(decks)
-
-        data[title] = undefined
-        delete data[title]
-
-        AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(data))
     } catch (err) {
-        console.log(`Error removig deck ${title} `, err)
+        console.log(`Error add card ${card} `, err)
+    }
+}
+
+export async function removeDeckAPI(title) {
+    try {
+        const decks = await AsyncStorage.getItem(FLASHCARDS_KEY);
+
+        const data = JSON.parse(decks);
+
+        data[title] = undefined;
+        delete data[title];
+
+        AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(data));
+    } catch (err) {
+        console.log(`Error removig deck ${title} `, err);
     }
 }

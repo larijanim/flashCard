@@ -1,15 +1,62 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from "react-native";
-import {blue} from '../utils/colors';
+import {StyleSheet, Text, View ,TouchableOpacity,Alert, Button} from "react-native";
+import {blue , white, gray} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
+import { handleNewDeck } from '../actions'
+import { TextInput } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
+
+
 
 
 class DeckNew extends Component {
-    render() {
+    state = {
+        title: '',
+        }
+
+
+    handleTextChange = (title) => {
+        this.setState({ title })
+    }
+    handleSubmit = () => {
+        const {dispatch ,  navigation  } = this.props
+        const {title } = this.state
+        if (this.state.title === '') {
+            Alert.alert("Text inputs are empty!");
+        } else {
+            const deck = {
+                title: title,
+                questions: [],
+            }
+            dispatch(handleNewDeck(deck))
+            this.setState({title: ''})
+            navigation.navigate(
+                "DeckList" //,
+               // {title: title}
+            )
+
+        }
+    }
+
+
+
+        render() {
+            const { title } = this.state
         return (
             <View style={styles.container}>
 
-                <Text>you are in DeckNew</Text>
+                <Text style={styles.title}>Add a New Title:</Text>
+                <TextInput
+                    style={styles.TextInput}
+                    value={title}
+                    placeholder='Enter the name of the deck'
+                    onChangeText={this.handleTextChange}
+                />
+
+                    <Button
+                        title={`ADD`}
+                        onPress={this.handleSubmit}/>
+
             </View>
         );
     }
@@ -18,10 +65,29 @@ class DeckNew extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: blue,
+        backgroundColor: white,
         alignItems: 'center',
         justifyContent: 'center',
     },
+    TextInput: {
+        width: 300,
+        borderColor: gray,
+        borderWidth: 2,
+        padding: 8,
+        borderRadius: 5,
+        marginBottom: 20,
+
+    },
+
+    title: {
+        fontSize: 27,
+        color: blue,
+        marginBottom: 40,
+        marginTop: 20,
+        fontWeight: 'bold',
+        textAlign: "center"
+
+    },
 });
 
-export default DeckNew;
+export default connect()(DeckNew);

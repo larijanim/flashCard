@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckList from "./src/components/DeckList"
 import DeckDetail from "./src/components/DeckDetail";
@@ -7,24 +7,31 @@ import {blue} from "./src/utils/colors";
 import Navigation from "./src/setting/NavSet";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Provider } from 'react-redux'
+import reducer from './src/reducers'
+import middleware from './src/middleware'
+import { createStore } from 'redux'
 
 
-//const { Navigator, Screen } = createStackNavigator();
-export default function App() {
-  return (
+class App extends Component {
+  componentDidMount() {
+    // Notifications
+    // setLocalNotification()
+  }
 
-    <Navigation style={styles.container}/>
+  render() {
+    const store = createStore(reducer, middleware)
+    return (
+        <Provider store={store}>
 
-  );
+          <Navigation/>
+
+        </Provider>
+    );
+  }
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 
+export default (App);

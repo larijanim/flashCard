@@ -1,30 +1,35 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View , ScrollView} from "react-native";
 import {blue} from "../utils/colors";
 import {StatusBar} from "expo-status-bar";
 import { Button } from 'react-native';
-
+import {connect} from "react-redux";
+import Deck from "./Deck"
+import { handleInitialData } from '../actions/index'
 
 class DeckList extends Component {
+
+    componentDidMount() {
+        this.props.dispatch(handleInitialData())
+
+    }
     render() {
-
+        const { decks } = this.props
+        if (!decks) {
+            return <Text>No decks yet</Text>
+        }
+        const decksArr= Object.values(decks);
+        console.log("dddddd"+JSON.stringify(decks));
         return (
-            <View style={styles.container}>
+            <ScrollView >
 
+                { decksArr.map(deck => {
+                    return (
+                        <Deck key={deck.id} deck={deck} navigation={this.props.navigation} />
+                    );
+                })}
 
-                <Text
-                    onPress={() =>
-                    this.props.navigation.navigate("DeckDetail")
-                }>Click to see detailver1 </Text>
-                <Text
-                    onPress={() =>
-                        this.props.navigation.navigate("DeckDetail")
-                    }>Click to detail ver2 </Text>
-                <Button
-                    title={`Button Go to DeckDetail`}
-                    onPress={() => this.props.navigation.push("DeckDetail")
-                    }/>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -38,4 +43,10 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DeckList;
+function mapStateToProps(state) {
+    return {
+        decks: state
+    }
+};
+
+export default connect(mapStateToProps)(DeckList);
