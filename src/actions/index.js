@@ -57,15 +57,16 @@ export function handleNewCard(title, card) {
 
 }
 
-export async function handleNewDeck(deck) {
-   let x=  await addDeck(deck);
-   let y = await saveDeckAPI(deck.title);
-   return  y;
-    // return (dispatch)=> {
-    //       dispatch(addDeck(deck))
-    //     return saveDeckAPI(deck.title);
+export  function handleNewDeck(deck) {
+  // let x=  await addDeck(deck);
+ //  let y = await saveDeckAPI(deck.title);
+ //  return  y;
+     return (dispatch)=> {
+          dispatch(addDeck(deck))
+         return saveDeckAPI(deck.title);
 
-//}
+}
+
     async function getSomeAsyncData(value){
         const result = await fetchTheData(someUrl, value);
         return result;

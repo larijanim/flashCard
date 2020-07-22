@@ -14,7 +14,7 @@ export const decks = {
         ]
     },
     JavaScript: {
-        title: 'J avaScript',
+        title: 'JavaScript',
         id:2,
         questions: [
             {

@@ -44,9 +44,8 @@ function mapStateToProps (state, {route}){
     const currDeck=decksArr.filter(function (deck) {
         return deck.title === deck_title ;
     })
-    const x=currDeck;
-    console.log("xxxxx"+JSON.stringify(x));
-    console.log("aaaaaa"+currDeck['questions']);
+    console.log("currDeck"+JSON.stringify(currDeck));
+    console.log("questions"+currDeck['questions']);
     return {
 
         deck: decksArr
