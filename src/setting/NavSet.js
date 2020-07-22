@@ -50,13 +50,6 @@ const ListStackScreen = () => (
                 headerTitle: `Quiz`,
             })}
         />
-        <ListStack.Screen
-            name='RemoveDeck'
-            component={RemoveDeck}
-            options={() => ({
-                headerTitle: `RemoveDeck`
-            })}
-        />
     </ListStack.Navigator>
 );
 

@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View , button} from "react-native";
+import {StyleSheet, Text, View , Button} from "react-native";
 import {blue} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
+import { connect } from 'react-redux'
 
 
 class Quiz extends Component {
     render() {
+        const { deck} = this.props
+     //   const questionArr= deck.questions;
+
         return (
             <View style={styles.container}>
 
-                <Text>you are in Quiz</Text>
+                <Text>you are in Quiz of </Text>
                 <Button
                     title={`Show Answer`}/>
                 <Button
@@ -34,10 +38,18 @@ const styles = StyleSheet.create({
     },
 });
 
-function mapStateToProps ({ decks }, {route}){
-    const { deckId } = route.params;
+function mapStateToProps (state, {route}){
+    const { deck_title } = route.params;
+    const decksArr= Object.values(state);
+    const currDeck=decksArr.filter(function (deck) {
+        return deck.title === deck_title ;
+    })
+    const x=currDeck;
+    console.log("xxxxx"+JSON.stringify(x));
+    console.log("aaaaaa"+currDeck['questions']);
     return {
-        deck: decks[deckId]
+
+        deck: decksArr
     };
 };
 

@@ -5,7 +5,7 @@ import { getDecks ,
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
-export const DELETE_DECK = 'DELETE_DECK'
+export const REMOVE_DECK = 'REMOVE_DECK'
 export const ADD_CARD = 'ADD_CARD'
 
 export function receiveDecks(decks) {
@@ -22,9 +22,9 @@ export function addDeck(deck) {
     }
 }
 
-export function deleteDeck(title) {
+export function removeDeck(title) {
     return {
-        type: DELETE_DECK,
+        type: REMOVE_DECK,
         title
     }
 }
@@ -57,19 +57,26 @@ export function handleNewCard(title, card) {
 
 }
 
-export function handleNewDeck(deck) {
-    return (dispatch)=> {
-            dispatch(addDeck(deck))
-            return saveDeckAPI(deck.title)
-    };
+export async function handleNewDeck(deck) {
+   let x=  await addDeck(deck);
+   let y = await saveDeckAPI(deck.title);
+   return  y;
+    // return (dispatch)=> {
+    //       dispatch(addDeck(deck))
+    //     return saveDeckAPI(deck.title);
 
+//}
+    async function getSomeAsyncData(value){
+        const result = await fetchTheData(someUrl, value);
+        return result;
+    }
 }
 
 
 export function handleDelDeck(title ) {
-    return function(dispatch) {
-        return removeDeckAPI(title )
-            .then(()=> { dispatch(deleteDeck(title))});
+    return (dispatch)=> {
+        dispatch( removeDeck(title ))
+            return removeDeckAPI(title);
     };
 
 }

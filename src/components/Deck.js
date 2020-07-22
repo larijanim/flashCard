@@ -13,20 +13,23 @@ import DeckDetail from "./DeckDetail";
 class Deck extends React.Component {
     render() {
         const { deck, navigation} = this.props
+        const questionArr= deck[`questions`];
+        const q_length=(questionArr== undefined )?0:questionArr.length;
+        console.log("vvvvvv"+JSON.stringify(questionArr));
         return (
 
             <TouchableOpacity>
 
                 <Button
-                    title={`${deck.title}`+` - `+`${deck.questions.length}`+ `Cards`}
+                    title={`${deck.title}`+` - `+`${q_length}`+ `Cards`}
                     headerbacktitle={`List`}
                     onPress={() => {navigation.push("DeckDetail", {
                         deck_title: `${deck.title}`,
-                        q_num: `${deck.questions.length}`
+                        q_num: `${q_length}`
                     })
 
                     }}/>
-                <Text style={[styles.itemText, { color: gray, fontSize: 16 }]}>{deck.questions.length} Cards</Text>
+                <Text style={[styles.itemText, { color: gray, fontSize: 16 }]}>{q_length} Cards</Text>
             </TouchableOpacity>
 
         )

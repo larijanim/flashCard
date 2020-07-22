@@ -32,7 +32,7 @@ class CardNew extends Component {
             this.setState({question: ''})
             this.setState({answer: ''})
             navigation.navigate("DeckList");
-           // navigation.navigate("DeckList", {title: deck_title});
+
         }
     }
 
@@ -40,7 +40,7 @@ class CardNew extends Component {
 
     render() {
         const { deck_title } = this.props.route.params
-        if(this.state.DeckDetail==true){ return (this.props.navigation.navigate('DeckDetail', {deck_title}))}
+      //  if(this.state.DeckDetail==true){ return (this.props.navigation.navigate('DeckDetail', {deck_title}))}
         const { question, answer } = this.state
 
         return (
@@ -79,6 +79,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+
+
+    title: {
+        fontSize: 27,
+        color: blue,
+        marginBottom:45,
+        marginTop: 15,
+        fontWeight: 'bold',
+        textAlign: "center"
+
+    },
     TextInput: {
         width: 300,
         borderColor: gray,
@@ -86,16 +97,6 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 5,
         marginBottom: 20,
-
-    },
-
-    title: {
-        fontSize: 27,
-        color: blue,
-        marginBottom: 40,
-        marginTop: 20,
-        fontWeight: 'bold',
-        textAlign: "center"
 
     },
 });

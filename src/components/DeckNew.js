@@ -31,8 +31,7 @@ class DeckNew extends Component {
             dispatch(handleNewDeck(deck))
             this.setState({title: ''})
             navigation.navigate(
-                "DeckList" //,
-               // {title: title}
+                "DeckList"
             )
 
         }
@@ -69,25 +68,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+
+    title: {
+        fontSize: 28,
+        color: blue,
+        marginBottom: 50,
+        marginTop: 15,
+        fontWeight: 'bold',
+        textAlign: "center"
+
+    },
     TextInput: {
         width: 300,
         borderColor: gray,
         borderWidth: 2,
         padding: 8,
         borderRadius: 5,
-        marginBottom: 20,
+        marginBottom: 15,
 
     },
 
-    title: {
-        fontSize: 27,
-        color: blue,
-        marginBottom: 40,
-        marginTop: 20,
-        fontWeight: 'bold',
-        textAlign: "center"
-
-    },
 });
 
 export default connect()(DeckNew);

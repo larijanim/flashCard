@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {blue , white , gray} from '../utils/colors';
+import {blue , red , white , gray} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
 import Quiz from "./Quiz";
 import DeckNew from "./DeckNew";
 import RemoveDeck from "./RemoveDeck";
+import handleDelDeck from "../actions";
 
 
 class DeckDetail extends Component {
+
+    handelDELETE=( )=>{
+        const {dispatch , title , navigation} = this.props;
+        dispatch(handleDelDeck(title ));
+        navigation.navigate("DeckList");
+
+    }
     render() {
         const { deck_title } = this.props.route.params
         const {q_num} = this.props.route.params
@@ -33,19 +41,16 @@ class DeckDetail extends Component {
                    <Button
                         title={`Start Quiz`}
                         onPress={() => {navigation.push("Quiz", {
-                            deck_title: `Quiz`
+                            deck_title: `${deck_title}`
                         })
 
                     }}/>
                </View>
                 <View style={{ marginTop: 5, marginBottom: 100}}>
                     <Button
+                        color={red}
                         title={`Remove Deck`}
-                        onPress={() => {navigation.push("RemoveDeck", {
-                             deck_title: `${deck_title}`
-                        })
-
-                        }}/>
+                        onPress= {this.handelDELETE}/>
                 </View>
             </View>
         );

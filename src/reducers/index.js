@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, ADD_DECK, DELETE_DECK, ADD_CARD } from '../actions/index'
+import { RECEIVE_DECKS, ADD_DECK, REMOVE_DECK, ADD_CARD } from '../actions/index'
 
 function decks(state = {}, action) {
     switch (action.type) {
@@ -19,11 +19,10 @@ function decks(state = {}, action) {
 
             }
 
-        case DELETE_DECK:
-            // brilliant
-            const { titleId } = action;
-            const { [titleId]: value, ...restDeck } = state;
-            return restDeck ;
+        case REMOVE_DECK:
+            const { titleRE } = action;
+            const { [titlRE]: value, ...newDeck } = state;
+            return newDeck ;
 
 
 

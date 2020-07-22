@@ -2,7 +2,7 @@ import {AsyncStorage} from 'react-native'
 import { decks } from './data'
 import {generateId} from "./helpers";
 
-export const FLASHCARDS_KEY = '@FlashCardsStorage'
+export const FLASHCARDS_KEY = '@FlashCardsStorage126'
 
 export async function getDecks() {
     try {
@@ -34,22 +34,22 @@ export async function getDeck(id) {
     }
 }
 
-export  function saveDeckAPI(title ) {
-    try{ getDecks()
+export async function saveDeckAPI(title ) {
+    try{  getDecks()
         .then((decks) => {
             return {
                 ...decks,
                        [title]: {
+                       title: title,
                        id: generateId(),
-                       title,
                       questions: [],}
                 }
         })
         .then((newDecks) => {
-            AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(newDecks))
+             AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(newDecks))
         })
     } catch (err) {
-        console.log(`Error add card ${card} `, err)
+        console.log(`Error add deck ${title} `, err)
     }
 }
 

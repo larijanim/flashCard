@@ -1,4 +1,4 @@
-export const blue = 'steelblue'
-export const gray = '#cfc6c6'
+export const gray = '#91848d'
 export const white = '#fff'
-export const red = 'red'
+export const red = '#d20861'
+export const blue = '#2e36d2'
