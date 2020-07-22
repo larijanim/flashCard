@@ -12,10 +12,10 @@ function decks(state = {}, action) {
             const { deck } = action
             return {
                 ...state,
-                decks:{
-                    ...state.decks,
+
+                    ...state.deck,
                     [deck.title]: deck
-                }
+                
 
             }
 
@@ -42,3 +42,6 @@ function decks(state = {}, action) {
 }
 
 export default decks
+ //   [title]: {
+//...state[title],
+    //    questions: []}

@@ -7,8 +7,8 @@ import { connect } from 'react-redux'
 
 class Quiz extends Component {
     render() {
-        const { deck} = this.props
-     //   const questionArr= deck.questions;
+        const { questions} = this.props.deck
+     console.log("qqqq"+JSON.stringify(questions));
 
         return (
             <View style={styles.container}>
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state, {route}){
     const { deck_title } = route.params;
+
     const decksArr= Object.values(state);
     const currDeck=decksArr.filter(function (deck) {
         return deck.title === deck_title ;
@@ -48,7 +49,7 @@ function mapStateToProps (state, {route}){
     console.log("questions"+currDeck['questions']);
     return {
 
-        deck: decksArr
+        deck: currDeck
     };
 };
 
