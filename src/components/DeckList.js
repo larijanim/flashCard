@@ -19,13 +19,13 @@ class DeckList extends Component {
             return <Text>No decks yet</Text>
         }
         const decksArr= Object.values(decks);
-        console.log("dddddd"+JSON.stringify(decks));
+       // console.log("dddddd"+JSON.stringify(decks));
         return (
             <ScrollView >
 
-                { decksArr.map(deck => {
+                { decksArr.map((deck ,i) => {
                     return (
-                        <Deck key={deck.id} deck={deck} navigation={this.props.navigation} />
+                        <Deck key={i} deck={deck} navigation={this.props.navigation} />
                     );
                 })}
 

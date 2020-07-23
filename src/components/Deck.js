@@ -15,7 +15,7 @@ class Deck extends React.Component {
         const { deck, navigation} = this.props
         const questionArr= deck[`questions`];
         const q_length=(questionArr== undefined )?0:questionArr.length;
-        console.log("vvvvvv"+JSON.stringify(questionArr));
+        //console.log("vvvvvv"+JSON.stringify(questionArr));
         return (
 
             <TouchableOpacity>
@@ -25,7 +25,7 @@ class Deck extends React.Component {
                     headerbacktitle={`List`}
                     onPress={() => {navigation.push("DeckDetail", {
                         deck_title: `${deck.title}`,
-                        q_num: `${q_length}`
+                        q_num: `${q_length}`,
                     })
 
                     }}/>
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
 
 
 
-export default Deck;
+export default connect()(Deck);

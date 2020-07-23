@@ -29,7 +29,7 @@ export function removeDeck(title) {
     }
 }
 
-// card must be an object with question and answer
+
 export function addCard(title, card) {
     return {
         type: ADD_CARD,

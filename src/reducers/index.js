@@ -1,6 +1,6 @@
 import { RECEIVE_DECKS, ADD_DECK, REMOVE_DECK, ADD_CARD } from '../actions/index'
 
-function decks(state = {}, action) {
+function decksReducer(state = {}, action) {
     switch (action.type) {
         case RECEIVE_DECKS:
             return {
@@ -12,17 +12,16 @@ function decks(state = {}, action) {
             const { deck } = action
             return {
                 ...state,
+                ...state.deck,
+                [deck.title]: deck
 
-                    ...state.deck,
-                    [deck.title]: deck
-                
 
             }
 
         case REMOVE_DECK:
-            const { titleRE } = action;
-            const { [titlRE]: value, ...newDeck } = state;
-            return newDeck ;
+        {const { title} = action;
+            const { [title]: value, ...newDeck } = state;
+            return newDeck ;}
 
 
 
@@ -41,7 +40,5 @@ function decks(state = {}, action) {
     }
 }
 
-export default decks
- //   [title]: {
-//...state[title],
-    //    questions: []}
+export default decksReducer
+

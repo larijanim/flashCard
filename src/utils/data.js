@@ -1,7 +1,6 @@
 export const decks = {
     React: {
-        title: 'Reacts',
-        id:1,
+        title: 'React',
         questions: [
             {
                 question: 'What is React?',
@@ -15,7 +14,6 @@ export const decks = {
     },
     JavaScript: {
         title: 'JavaScript',
-        id:2,
         questions: [
             {
                 question: 'What is promise?',

@@ -3,23 +3,23 @@ import {Button, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {blue , red , white , gray} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
 import Quiz from "./Quiz";
-import DeckNew from "./DeckNew";
-import RemoveDeck from "./RemoveDeck";
-import handleDelDeck from "../actions";
+import {handleDelDeck} from "../actions";
+import { connect } from 'react-redux'
 
 
 class DeckDetail extends Component {
 
-    handelDELETE=( )=>{
-        const {dispatch , title , navigation} = this.props;
-        dispatch(handleDelDeck(title ));
-        navigation.navigate("DeckList");
+    handelDELETE=( title)=>{
+        const {dispatch ,  navigation} = this.props;
+      //  dispatch(handleDelDeck( title ));
+        console.log("dddddd"+ title);
+     //   navigation.navigate("DeckList");
 
     }
     render() {
         const { deck_title } = this.props.route.params
         const {q_num} = this.props.route.params
-        const {  navigation } = this.props
+        const { dispatch, navigation } = this.props
         return (
             <View style={styles.container}>
 
@@ -50,7 +50,9 @@ class DeckDetail extends Component {
                     <Button
                         color={red}
                         title={`Remove Deck`}
-                        onPress= {this.handelDELETE}/>
+                        onPress= {()=>{
+                               dispatch(handleDelDeck( `${deck_title}` ));
+                               navigation.navigate("DeckList");}}/>
                 </View>
             </View>
         );
@@ -80,4 +82,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DeckDetail;
+export default connect()(DeckDetail);

@@ -8,6 +8,7 @@ import Navigation from "./src/setting/NavSet";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from 'react-redux'
+//import { composeWithDevTools } from "redux-devtools-extension";
 import reducer from './src/reducers'
 import middleware from './src/middleware'
 import { createStore } from 'redux'
@@ -20,7 +21,8 @@ class App extends Component {
   }
 
   render() {
-    const store = createStore(reducer, middleware)
+    const store = createStore(reducer, middleware )
+     // composeWithDevTools()
     return (
         <Provider store={store}>
 
