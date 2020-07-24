@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, ScrollView } from "react-native";
 import {blue , white} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 
 
@@ -21,18 +22,15 @@ class Quiz extends Component {
     }
 
 
-    handelNextbtn=()=>{
-        this.setState((previousState)=> ({
-        currqestion: previousState.currqestion+1
 
-            }));
-    }
+
     handelResetbtn=()=>{
         this.setState(()=> ({
-            currqes:0 ,
+            currqestion:0 ,
             questionView:true,
             btnLable:'Answer',
             lastQuestion:false,
+            score:0,
         }));
 
     }
@@ -58,6 +56,9 @@ class Quiz extends Component {
                 lastQuestion:true,
                 score: previousState.score+1 ,
             }));
+
+            clearLocalNotification()
+                .then(setLocalNotification);
         }
     }
     handelInCorrectbtn=()=>{
@@ -73,13 +74,15 @@ class Quiz extends Component {
             this.setState((previousState)=> ({
                 lastQuestion:true,
             }));
+            clearLocalNotification()
+                .then(setLocalNotification);
         }
     }
 
 
     render() {
       const { deck_title , questions , navigation } = this.props
-        const {questionView , lastQuestion , btnLable , score}=this.state
+        const {questionView , lastQuestion , btnLable , score , currqestion}=this.state
    // console.log("qqqq"+JSON.stringify(questions));
 
 
@@ -87,7 +90,8 @@ class Quiz extends Component {
 
             <View style={styles.container}>
                 <Text>you are in Quiz of {deck_title} </Text>
-                <Text>Current Score {score}/{questions.length} </Text>
+                <Text>Question Number :{currqestion+1}/{questions.length}  </Text>
+                <Text>Current Score {score}/{questions.length}</Text>
                 {!lastQuestion?
                  (
                       <View>
@@ -104,9 +108,6 @@ class Quiz extends Component {
                         title={` Wrong Answer`}
                         onPress= {()=>this.handelInCorrectbtn()}/>
 
-                    <Button
-                        title={` Next Question`}
-                        onPress= {()=>this.handelNextbtn()}/>
                       </View>
                     ):(
                       <View>
@@ -117,7 +118,7 @@ class Quiz extends Component {
 
                      <Button
                      title={` Back`}
-                     onPress={() => {navigation.navigate("DeckDetail", { 
+                     onPress={() => {navigation.navigate("DeckDetail", {
                          deck_title: `${deck_title}`,
                          q_num: `${questions.length}`,
                      })
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps (state, {route}){
-    const { deck_title , navigation } = route.params;
+    const { deck_title } = route.params;
     const decksArr= Object.values(state);
     const currDeck=decksArr.filter(function (deck) {
         return deck.title === deck_title ;})[0];
@@ -149,7 +150,7 @@ function mapStateToProps (state, {route}){
     return {
         deck_title:deck_title,
         questions: currDeck['questions'],
-        navigation
+
 
     };
 };

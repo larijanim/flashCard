@@ -2,7 +2,7 @@ import { View, StyleSheet, AsyncStorage } from 'react-native'
 import { Notifications } from 'expo'
 import { Permissions } from 'expo-permissions'
 
-const NOTIFICATION_KEY = 'MobileFlashcards:notifications'
+const NOTIFICATION_KEY = 'Flashcards:notify'
 
 
 // make three methods
@@ -41,7 +41,7 @@ export function setLocalNotification() {
 
                             let tomorrow = new Data()
                             tomorrow.setDate(tomorrow.getDate() + 1)
-                            tomorrow.setHours(20)
+                            tomorrow.setHours(15)
                             tomorrow.setMinutes(0)
 
                             Notifications.scheduleLocalNotificationAsync(
@@ -59,13 +59,3 @@ export function setLocalNotification() {
         })
 }
 
-export const generateId = () => {
-    return (
-        Math.random()
-            .toString(36)
-            .substring(2, 15) +
-        Math.random()
-            .toString(36)
-            .substring(2, 15)
-    );
-};

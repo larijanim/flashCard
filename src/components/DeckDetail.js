@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Alert, Button, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {blue , red , white , gray} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
 import Quiz from "./Quiz";
@@ -16,6 +16,18 @@ class DeckDetail extends Component {
      //   navigation.navigate("DeckList");
 
     }
+    handelQuizbtn=(qLenght , deck_title) => {
+        const { navigation} = this.props;
+        if (qLenght>0) {
+            navigation.navigate("Quiz", {
+                deck_title: `${deck_title}`
+            })
+        }else{
+            Alert.alert('No card');
+            }
+
+
+}
     render() {
         const { deck_title } = this.props.route.params
         const {q_num} = this.props.route.params
@@ -40,11 +52,8 @@ class DeckDetail extends Component {
                 <View style={{ marginTop: 5, marginBottom: 100}}>
                    <Button
                         title={`Start Quiz`}
-                        onPress={() => {navigation.push("Quiz", {
-                            deck_title: `${deck_title}`
-                        })
-
-                    }}/>
+                        onPress={()=>this.handelQuizbtn(q_num , deck_title )}
+                   />
                </View>
                 <View style={{ marginTop: 5, marginBottom: 100}}>
                     <Button

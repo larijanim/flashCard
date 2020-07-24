@@ -2,7 +2,7 @@ import {AsyncStorage} from 'react-native'
 import { decks } from './data'
 import {generateId} from "./helpers";
 
-export const FLASHCARDS_KEY = '@FlashCardsStorage1253'
+export const FLASHCARDS_KEY = '@FlashCardsStorage1254'
 
 export async function getDecks() {
     try {
@@ -60,9 +60,15 @@ export async function addCardAPI(title, card) {
                 return{
                     ...decks,
                     [title]:{
-                        questions: decks[title].questions.concat([card])
+                       // questions: decks[title].questions.concat([card])
+                        ...decks[title],
+                        questions: [
+                            ...decks[title].questions,
+                            card
+                        ]
                     }
-                }
+                    }
+
             })
             .then((newDecks) =>{
                 AsyncStorage.setItem(FLASHCARDS_KEY, JSON.stringify(newDecks))
