@@ -2,7 +2,7 @@ import {AsyncStorage} from 'react-native'
 import { decks } from './data'
 import {generateId} from "./helpers";
 
-export const FLASHCARDS_KEY = '@FlashCardsStorage1251'
+export const FLASHCARDS_KEY = '@FlashCardsStorage1252'
 
 export async function getDecks() {
     try {

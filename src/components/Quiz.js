@@ -1,48 +1,99 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, ScrollView} from "react-native";
-import {blue} from '../utils/colors';
+import {blue , white} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
 import { connect } from 'react-redux'
-import Deck from "./Deck";
+import CardFront from "./CardFront";
+import CardBack from "./CardBack";
+
 
 
 class Quiz extends Component {
+
+
+    state={
+         currqestion:0,
+        btnLable:'Answer',
+        questionView:true,
+        score:0,
+        lastQuestion:false
+
+    }
+
+    handelNextbtn=()=>{
+        this.setState((previousState)=> ({
+        currqestion: previousState.currqestion+1
+
+            }));
+    }
+    handelShowbtn=(qFace)=>{
+        this.setState((previousState)=> ({
+            questionView:qFace,
+            btnLable:(qFace?`Answer`:`Question`)
+        }));
+    }
+    handelCorrectbtn=()=>{
+        this.setState((previousState)=> ({
+            currqestion: previousState.currqestion+1,
+            score: previousState.score+1 ,
+            questionView:true,
+        }));
+    }
+
+
     render() {
-      const { deck_title , currQuestions } = this.props
-   // console.log("qqqq"+JSON.stringify(currQuestions));
+      const { deck_title , questions } = this.props
+        const {questionView , lastQuestion , btnLable , score}=this.state
+   // console.log("qqqq"+JSON.stringify(questions));
+
 
         return (
+
             <View style={styles.container}>
+                <Text>you are in Quiz of {deck_title} </Text>
+                <Text>Current Scopre {score} </Text>
+                {!lastQuestion?
+                 (
 
-                <Text>you are in Quiz of {deck_title} +'\n'</Text>
-                <ScrollView >
+                      <View>
+                        <Text>{questionView && questions[this.state.currqestion].question}
+                            {!questionView && questions[this.state.currqestion].answer}
+                        </Text>
+                        <Button
+                          title={`Show  ${btnLable}`}
+                          onPress= {()=>this.handelShowbtn(!questionView)}/>
+                    <Button
+                    title={` Correct Answer`}
+                    onPress= {()=>this.handelCorrectbtn()}/>
+                    <Button
+                        title={` Wrong Answer`}/>
 
-                    { currQuestions.map((q , i) => {
-                        return (
-                            <Text> key={i}  , {q.question} </Text>
-                        );
-                    })}
+                    <Button
+                        title={` Next Question`}
+                        onPress= {()=>this.handelNextbtn()}
 
-                </ScrollView>
-                <Button
-                    title={`Show Answer`}/>
-                <Button
-                title={` Correct Answer`}/>
-                <Button
-                    title={` Wrong Answer`}/>
-                <Button
-                    title={` Show Question`}/>
-                <Button
-                    title={` Next Question`}/>
+                    /></View>
+                    ):(
+                      <View>
+                    <Text>{this.state.score} </Text>
+                    <Button
+                    title={` Rest`}/>
+
+                    <Button
+                    title={` Again`}
+
+                    /> </View>
+                    )}
+
             </View>
         );
-    }
-}
+    };
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: blue,
+        backgroundColor: white,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -56,7 +107,7 @@ function mapStateToProps (state, {route}){
 
     return {
         deck_title:deck_title,
-        currQuestions: currDeck['questions']
+        questions: currDeck['questions']
     };
 };
 
