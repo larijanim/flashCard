@@ -51,10 +51,15 @@ class DeckNew extends Component {
                     placeholder='Enter the name of the deck'
                     onChangeText={this.handleTextChange}
                 />
+                <TouchableOpacity
+                    style={[styles.buttonStyle,{  backgroundColor:'#766b73' }]}
+                    activeOpacity = { .5 }
+                    onPress={this.handleSubmit}
+                >
 
-                    <Button
-                        title={`ADD`}
-                        onPress={this.handleSubmit}/>
+                    <Text style={styles.textBtn}> ADD DECK</Text>
+
+                </TouchableOpacity>
 
             </View>
         );
@@ -83,10 +88,30 @@ const styles = StyleSheet.create({
         borderColor: gray,
         borderWidth: 2,
         padding: 8,
-        borderRadius: 5,
+        borderRadius: 10,
         marginBottom: 15,
 
     },
+    textBtn: {
+        color: white,
+        fontWeight: "bold",
+        textAlign: "center",
+        borderRadius: 12,
+    },
+    buttonStyle: {
+
+        marginTop:10,
+        paddingTop:15,
+        paddingBottom:15,
+        marginLeft:30,
+        marginRight:30,
+        backgroundColor:'#766b73',
+        borderRadius:10,
+        borderWidth: 1,
+        borderColor: '#fff',
+        width:150,
+    },
+
 
 });
 

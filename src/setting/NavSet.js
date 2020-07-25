@@ -23,7 +23,7 @@ const ListStackScreen = () => (
 
     >
         <ListStack.Screen
-            name='DeckList'
+            name='Deck List'
             component={DeckList}
             options={() => ({
                 headerTitle: `Flash Card `,
@@ -81,9 +81,10 @@ const AppTabsScreen = () => (
             component={ListStackScreen}
 
 
+
         />
         <MyTabs.Screen
-            name='NewDeck'
+            name='New Deck'
             component={NewDeckStackScreen}
 
         />

@@ -47,6 +47,7 @@ class CardNew extends Component {
             <View style={styles.container}>
 
                 <Text style={styles.title}>Add a card to  "{deck_title}" </Text>
+                <Text style={styles.itemText}>Question </Text>
                 <TextInput
                     style={styles.TextInput}
                     value={question}
@@ -54,6 +55,7 @@ class CardNew extends Component {
                     placeholder='Enter your question'
                     onChangeText={this.handleQuestionChange}
                 />
+                <Text style={styles.itemText}>Answer </Text>
                 <TextInput
                     style={styles.TextInput}
                     value={answer}
@@ -62,10 +64,15 @@ class CardNew extends Component {
                     onChangeText={this.handleAnswerChange}
 
                 />
+                <TouchableOpacity
+                    style={[styles.buttonStyle,{  backgroundColor:'#766b73' }]}
+                    activeOpacity = { .5 }
+                    onPress={this.handleSubmit}
+                >
 
-                <Button
-                    title={`ADD`}
-                    onPress={this.handleSubmit}/>
+                    <Text style={styles.textBtn}> ADD CARD</Text>
+
+                </TouchableOpacity>
 
             </View>
         );
@@ -90,14 +97,39 @@ const styles = StyleSheet.create({
         textAlign: "center"
 
     },
+    itemText: {
+        color: gray,
+        textAlign: 'center',
+        fontSize: 22,
+
+    },
     TextInput: {
         width: 300,
         borderColor: gray,
         borderWidth: 2,
         padding: 8,
-        borderRadius: 5,
+        borderRadius: 10,
         marginBottom: 20,
 
+    },
+    textBtn: {
+        color: white,
+        fontWeight: "bold",
+        textAlign: "center",
+        borderRadius: 12,
+    },
+    buttonStyle: {
+
+        marginTop:10,
+        paddingTop:15,
+        paddingBottom:15,
+        marginLeft:30,
+        marginRight:30,
+        backgroundColor:'#766b73',
+        borderRadius:10,
+        borderWidth: 1,
+        borderColor: '#fff',
+        width:150,
     },
 });
 

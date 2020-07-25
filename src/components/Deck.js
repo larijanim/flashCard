@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Button} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Button, Animated} from 'react-native'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/index'
 
@@ -11,6 +11,24 @@ import DeckDetail from "./DeckDetail";
 
 
 class Deck extends React.Component {
+
+    state = {
+        fadeValue: new Animated.Value(0)
+    };
+
+    _start = () => {
+        Animated.timing(this.state.fadeValue, {
+            toValue: 1,
+            duration: 3000,
+            useNativeDriver: true,
+
+        }).start();
+    };
+    componentDidMount() {
+        this._start();
+    }
+
+
     render() {
         const { deck, navigation} = this.props
         const questionArr= deck[`questions`];
@@ -20,16 +38,32 @@ class Deck extends React.Component {
 
             <TouchableOpacity>
 
-                <Button
-                    title={`${deck.title}`+` - `+`${q_length}`+ `Cards`}
-                    headerbacktitle={`List`}
-                    onPress={() => {navigation.push("DeckDetail", {
-                        deck_title: `${deck.title}`,
-                        q_num: `${q_length}`,
-                    })
+                <Animated.View
+                    style={{
+                        opacity: this.state.fadeValue,
+                        height: 50,
+                        width:200,
+                        marginLeft: 100,
+                        marginRight: 100,
+                        marginBottom: 20,
+                        marginTop: 30,
+                        borderRadius: 12,
+                        backgroundColor: "blue",
+                        justifyContent: "center",
+                    }}
 
-                    }}/>
-                <Text style={[styles.itemText, { color: gray, fontSize: 16 }]}>{q_length} Cards</Text>
+                   >
+                    <Text style={styles.text}
+                          onPress={() => {navigation.navigate("DeckDetail", {
+                              deck_title: `${deck.title}`,
+                              q_num: `${q_length}`,
+                          })
+
+                          }}> {`${deck.title}`+` - `+`${q_length}`+ `Cards`}</Text>
+
+                </Animated.View>
+
+
             </TouchableOpacity>
 
         )
@@ -59,7 +93,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 22,
 
-    }
+    },
+    text: {
+        fontSize: 20,
+        color: "#fff",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+
 })
 
 

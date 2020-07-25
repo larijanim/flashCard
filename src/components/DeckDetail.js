@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, Button, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {blue , red , white , gray} from '../utils/colors';
+import {blue , red , white , gray, green} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
 import Quiz from "./Quiz";
 import {handleDelDeck} from "../actions";
@@ -37,32 +37,52 @@ class DeckDetail extends Component {
 
                 <View style={styles.item}>
                     <Text style={styles.itemText}>{deck_title}</Text>
-                    <Text style={[styles.itemText, { color: gray, fontSize: 16 }]}>{q_num} Card</Text>
+                    <Text style={[styles.itemText, { color: white, fontSize: 16 }]}>{q_num} Card</Text>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <Button
-                        title={`Add Card`}
-                        color="gray"
-                        onPress={() => {navigation.push("CardNew", {
-                            deck_title: `${deck_title}`
-                        })
-                        }}
-                    />
-                </View>
-                <View style={{ marginTop: 5, marginBottom: 100}}>
-                   <Button
-                        title={`Start Quiz`}
-                        onPress={()=>this.handelQuizbtn(q_num , deck_title )}
-                   />
-               </View>
-                <View style={{ marginTop: 5, marginBottom: 100}}>
-                    <Button
-                        color={red}
-                        title={`Remove Deck`}
-                        onPress= {()=>{
-                               dispatch(handleDelDeck( `${deck_title}` ));
-                               navigation.navigate("DeckList");}}/>
-                </View>
+                    <View style={{ marginTop: 5, marginBottom: 50}}>
+
+
+                            <TouchableOpacity
+                                style={[styles.buttonStyle,{  backgroundColor:'#766b73' }]}
+                                activeOpacity = { .5 }
+                                onPress={() => {navigation.push("CardNew", {
+                                    deck_title: `${deck_title}`
+                                })
+                                }}
+                            >
+
+                                <Text style={styles.textBtn}> ADD CARD</Text>
+
+                            </TouchableOpacity>
+
+
+
+                    </View>
+                    <View style={{ marginTop: 5, marginBottom: 50}}>
+                            <TouchableOpacity
+                                style={[styles.buttonStyle,{  backgroundColor:green }]}
+                                activeOpacity = { .5 }
+                                onPress={()=>this.handelQuizbtn(q_num , deck_title )}
+                            >
+                                <Text style={styles.textBtn}> START QUIZ</Text>
+
+                            </TouchableOpacity>
+                   </View>
+                   <View style={{ marginTop: 5, marginBottom:200}}>
+                        <TouchableOpacity
+                            style={[styles.buttonStyle,{  backgroundColor:red }]}
+                            activeOpacity = { .5 }
+                            onPress= {()=>{
+                                dispatch(handleDelDeck( `${deck_title}` ));
+                                navigation.navigate("DeckList");}}
+                         >
+                            <Text style={styles.textBtn}> REMOVE DECK</Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+            </View>
             </View>
         );
     }
@@ -82,13 +102,37 @@ const styles = StyleSheet.create({
         paddingLeft: 60,
         paddingRight: 60,
         marginBottom: 10,
+        borderRadius: 12,
+        width: 300,
     },
     itemText: {
         color: white,
         textAlign: 'center',
         fontSize: 22,
 
-    }
+    },
+    textBtn: {
+        color: white,
+        fontWeight: "bold",
+        textAlign: "center",
+        borderRadius: 12,
+    },
+    buttonStyle: {
+
+        marginTop:10,
+        paddingTop:15,
+        paddingBottom:15,
+        marginLeft:30,
+        marginRight:30,
+        backgroundColor:'#766b73',
+        borderRadius:10,
+        borderWidth: 1,
+        borderColor: '#fff',
+        width:150,
+    },
+
+
+
 });
 
 export default connect()(DeckDetail);

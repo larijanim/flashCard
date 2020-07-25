@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button, ScrollView } from "react-native";
-import {blue , white} from '../utils/colors';
+import {StyleSheet, Text, View, Button, ScrollView, TouchableOpacity} from "react-native";
+import {blue , white, gray , red , green} from '../utils/colors';
 import {StatusBar} from "expo-status-bar";
 import { connect } from 'react-redux';
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
@@ -20,8 +20,6 @@ class Quiz extends Component {
         lastQuestion:false
 
     }
-
-
 
 
     handelResetbtn=()=>{
@@ -89,40 +87,66 @@ class Quiz extends Component {
         return (
 
             <View style={styles.container}>
-                <Text>you are in Quiz of {deck_title} </Text>
-                <Text>Question Number :{currqestion+1}/{questions.length}  </Text>
-                <Text>Current Score {score}/{questions.length}</Text>
+                <Text style={styles.title}> {deck_title} </Text>
+                <Text style={styles.title}>Question:{currqestion+1}/{questions.length}-Score {score}/{questions.length}  </Text>
+                <Text> </Text>
                 {!lastQuestion?
                  (
-                      <View>
-                        <Text>{questionView && questions[this.state.currqestion].question}
+                      <View >
+                        <Text style={styles.itemText}>{questionView && questions[this.state.currqestion].question}
                             {!questionView && questions[this.state.currqestion].answer}
                         </Text>
-                        <Button
-                          title={`Show  ${btnLable}`}
-                          onPress= {()=>this.handelShowbtn(!questionView)}/>
-                    <Button
-                    title={` Correct Answer`}
-                    onPress= {()=>this.handelCorrectbtn()}/>
-                    <Button
-                        title={` Wrong Answer`}
-                        onPress= {()=>this.handelInCorrectbtn()}/>
+                          <TouchableOpacity
+                              style={[styles.buttonStyle,{  backgroundColor:gray }]}
+                              activeOpacity = { .5 }
+                              onPress= {()=>this.handelShowbtn(!questionView)}
+                          >
+                              <Text style={styles.textBtn}> Show {btnLable}</Text>
+
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                              style={[styles.buttonStyle,{  backgroundColor:green }]}
+                              activeOpacity = { .5 }
+                              onPress= {()=>this.handelCorrectbtn()}
+                          >
+                              <Text style={styles.textBtn}> Correct Answer</Text>
+
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                              style={[styles.buttonStyle,{  backgroundColor:red }]}
+                              activeOpacity = { .5 }
+                              onPress= {()=>this.handelInCorrectbtn()}
+                          >
+                              <Text style={styles.textBtn}> Wrong Answer</Text>
+
+                          </TouchableOpacity>
 
                       </View>
                     ):(
                       <View>
-                      <Text> Your score is :{score}/{questions.length} </Text>
-                     <Button
-                     title={` Reset`}
-                     onPress= {()=>this.handelResetbtn()}/>
+                      <Text style={styles.itemText}>Your score is : {score}/{questions.length} </Text>
+                      <TouchableOpacity
+                          style={[styles.buttonStyle,{  backgroundColor:red }]}
+                          activeOpacity = { .5 }
+                          onPress= {()=>this.handelResetbtn()}
+                      >
+                          <Text style={styles.textBtn}> RESET</Text>
 
-                     <Button
-                     title={` Back`}
-                     onPress={() => {navigation.navigate("DeckDetail", {
-                         deck_title: `${deck_title}`,
-                         q_num: `${questions.length}`,
-                     })
-                     }} />
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                          style={[styles.buttonStyle,{  backgroundColor:green }]}
+                          activeOpacity = { .5 }
+                          onPress={() => {navigation.navigate("DeckDetail", {
+                              deck_title: `${deck_title}`,
+                              q_num: `${questions.length}`,
+                          })
+                          }}
+                      >
+                          <Text style={styles.textBtn}> BACK</Text>
+
+                      </TouchableOpacity>
+
 
                      </View>
                     )}
@@ -134,11 +158,66 @@ class Quiz extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: 60,
         flex: 1,
-        backgroundColor: white,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        paddingRight: 15,
+        paddingLeft: 15
     },
+    item: {
+        backgroundColor: blue,
+        padding: 20,
+        paddingLeft: 60,
+        paddingRight: 60,
+        marginBottom: 10,
+        borderRadius: 12,
+        width: 300,
+        height: 300,
+    },
+    itemText: {
+        color: white,
+        textAlign: 'center',
+        textAlignVertical:'center',
+        fontSize: 22,
+        backgroundColor: blue,
+        padding: 20,
+        paddingLeft: 40,
+        paddingRight: 40,
+        marginBottom: 10,
+        borderRadius: 12,
+        width: 300,
+        height: 200,
+
+    },
+    textBtn: {
+        color: white,
+        fontWeight: "bold",
+        textAlign: "center",
+        borderRadius: 12,
+    },
+    buttonStyle: {
+
+        marginTop:10,
+        paddingTop:15,
+        paddingBottom:15,
+        marginLeft:80,
+        marginRight:80,
+        backgroundColor:'gray',
+        borderRadius:10,
+        borderWidth: 1,
+        borderColor: '#fff',
+        width:150,
+    },
+    title: {
+        fontSize: 28,
+        color: blue,
+        marginBottom: 10,
+        marginTop: 15,
+        fontWeight: 'bold',
+        textAlign: "center"
+
+    },
+
 });
 
 function mapStateToProps (state, {route}){

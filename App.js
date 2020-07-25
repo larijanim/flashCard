@@ -15,10 +15,7 @@ import { createStore } from 'redux'
 
 
 class App extends Component {
-  componentDidMount() {
-    // Notifications
-    // setLocalNotification()
-  }
+
 
   render() {
     const store = createStore(reducer, middleware )
