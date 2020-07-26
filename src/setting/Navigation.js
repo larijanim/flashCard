@@ -30,7 +30,7 @@ const AppTabsScreen = () => (
             component={DeckDetail}
             options={{
                 tabBarLabel: 'DeckDetail',
-                tabBarIcon: ({ color }) => <Ionicons name='ios-bookmarks' size={20} color={color} />
+                tabBarIcon: ({ color }) => <Ionicons name='add-circle' size={20} color={color} />
             }}
         />
 

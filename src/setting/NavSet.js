@@ -6,9 +6,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import DeckList from '../components/DeckList'
 import DeckDetail from '../components/DeckDetail'
 import DeckNew from "../components/DeckNew";
-import RemoveDeck from "../components/RemoveDeck";
 import Quiz from "../components/Quiz";
 import CardNew from "../components/CardNew";
+import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 
 
@@ -79,14 +80,22 @@ const AppTabsScreen = () => (
         <MyTabs.Screen
             name='Deck List'
             component={ListStackScreen}
-
+            options={{
+                tabBarLabel: 'Deck List',
+                tabBarIcon: ({ color }) => <Entypo name="list" size={20} color={color} />
+            }}
 
 
         />
         <MyTabs.Screen
             name='New Deck'
             component={NewDeckStackScreen}
+            options={{
+                tabBarLabel: 'ADD Deck',
+                tabBarIcon: ({ color }) => <AntDesign name='pluscircle' size={20} color={color} />
 
+
+            }}
         />
 
 
