@@ -39,7 +39,7 @@ class DeckDetail extends Component {
                     <Text style={styles.itemText}>{deck_title}</Text>
                     <Text style={[styles.itemText, { color: white, fontSize: 16 }]}>{q_num} Card</Text>
                 </View>
-                <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={{  justifyContent: 'center' }}>
                     <View style={{ marginTop: 5, marginBottom: 50}}>
 
 

@@ -93,7 +93,8 @@ class Quiz extends Component {
                 {!lastQuestion?
                  (
                       <View >
-                        <Text style={styles.itemText}>{questionView && questions[this.state.currqestion].question}
+                        <Text style={[styles.itemText,!questionView &&{ backgroundColor:green}]}>
+                             {questionView && questions[this.state.currqestion].question}
                             {!questionView && questions[this.state.currqestion].answer}
                         </Text>
                           <TouchableOpacity
@@ -124,7 +125,7 @@ class Quiz extends Component {
                       </View>
                     ):(
                       <View>
-                      <Text style={styles.itemText}>Your score is : {score}/{questions.length} </Text>
+                      <Text style={[styles.itemText ,{  backgroundColor:red }] }>Your score is : {score}/{questions.length} </Text>
                       <TouchableOpacity
                           style={[styles.buttonStyle,{  backgroundColor:red }]}
                           activeOpacity = { .5 }
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
         color: white,
         textAlign: 'center',
         textAlignVertical:'center',
-        fontSize: 22,
+        fontSize: 20,
         backgroundColor: blue,
         padding: 20,
         paddingLeft: 40,
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 12,
         width: 300,
-        height: 200,
+        height: 150,
 
     },
     textBtn: {
@@ -209,10 +210,10 @@ const styles = StyleSheet.create({
         width:150,
     },
     title: {
-        fontSize: 28,
+        fontSize: 14,
         color: blue,
-        marginBottom: 10,
-        marginTop: 15,
+        marginBottom: 5,
+        marginTop: 10,
         fontWeight: 'bold',
         textAlign: "center"
 

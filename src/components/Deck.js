@@ -41,12 +41,12 @@ class Deck extends React.Component {
                 <Animated.View
                     style={{
                         opacity: this.state.fadeValue,
-                        height: 50,
-                        width:200,
-                        marginLeft: 100,
-                        marginRight: 100,
-                        marginBottom: 20,
-                        marginTop: 30,
+                        height: 100,
+                       // width:330,
+                        marginLeft: 10,
+                        marginRight: 10,
+                        marginBottom: 10,
+                        marginTop: 20,
                         borderRadius: 12,
                         backgroundColor: "blue",
                         justifyContent: "center",
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     title: {
         textAlign: "center",
         color: blue,
-        fontSize: 30,
+        fontSize: 20,
         marginBottom: 60,
         marginTop: 20,
         fontWeight: 'bold'
@@ -87,15 +87,16 @@ const styles = StyleSheet.create({
         paddingRight: 60,
         marginBottom: 20,
         width: 300,
+
     },
     itemText: {
         color: white,
         textAlign: 'center',
-        fontSize: 22,
+        fontSize: 18,
 
     },
     text: {
-        fontSize: 20,
+        fontSize: 15,
         color: "#fff",
         fontWeight: "bold",
         textAlign: "center"
