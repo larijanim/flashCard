@@ -17,6 +17,8 @@ import { createStore } from 'redux'
 class App extends Component {
 
 
+   // Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.All;
+
   render() {
     const store = createStore(reducer, middleware )
      // composeWithDevTools()

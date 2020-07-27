@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Button, Animated} from 'react-native'
+import {View, Text, StyleSheet, Button, Animated , TouchableWithoutFeedback} from 'react-native'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/index'
 
 // import { decks } from '../utils/data'
 import { blue, gray, white } from '../utils/colors'
 import DeckDetail from "./DeckDetail";
+import ScalingButton from "./ScalingButton";
 
 
 
@@ -16,16 +17,9 @@ class Deck extends React.Component {
         fadeValue: new Animated.Value(0)
     };
 
-    _start = () => {
-        Animated.timing(this.state.fadeValue, {
-            toValue: 1,
-            duration: 3000,
-            useNativeDriver: true,
 
-        }).start();
-    };
     componentDidMount() {
-        this._start();
+
     }
 
 
@@ -36,35 +30,23 @@ class Deck extends React.Component {
         //console.log("vvvvvv"+JSON.stringify(questionArr));
         return (
 
-            <TouchableOpacity>
-
-                <Animated.View
-                    style={{
-                        opacity: this.state.fadeValue,
-                        height: 100,
-                       // width:330,
-                        marginLeft: 10,
-                        marginRight: 10,
-                        marginBottom: 10,
-                        marginTop: 20,
-                        borderRadius: 12,
-                        backgroundColor: "blue",
-                        justifyContent: "center",
-                    }}
-
-                   >
-                    <Text style={styles.text}
-                          onPress={() => {navigation.navigate("DeckDetail", {
-                              deck_title: `${deck.title}`,
-                              q_num: `${q_length}`,
-                          })
-
-                          }}> {`${deck.title}`+` - `+`${q_length}`+ `Cards`}</Text>
-
-                </Animated.View>
 
 
-            </TouchableOpacity>
+            <View style={styles.container}>
+
+                    <ScalingButton
+                        label={`${deck.title}`+` - `+`${q_length}`+ `Cards`}
+                        onPress={() => {navigation.navigate("DeckDetail", {
+                            deck_title: `${deck.title}`,
+                            q_num: `${q_length}`,
+                        })
+
+                        }}
+                        styles={{button: styles.animated_button, label: styles.button_label}} />
+
+                </View>
+
+
 
         )
 
@@ -72,6 +54,12 @@ class Deck extends React.Component {
 }
 
 const styles = StyleSheet.create({
+
+        container: {
+            flex: 1,
+            flexDirection: 'column',
+            padding: 30
+        },
     title: {
         textAlign: "center",
         color: blue,
@@ -101,6 +89,15 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center"
     },
+    animated_button: {
+        backgroundColor: 'blue',
+        borderRadius:10
+    },
+    button_label: {
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: 'bold'
+    }
 
 })
 
