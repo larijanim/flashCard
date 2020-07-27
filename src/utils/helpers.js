@@ -1,22 +1,15 @@
 import { View, StyleSheet, AsyncStorage } from 'react-native'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions';
-
-const NOTIFICATION_KEY = 'Flashcards:notify'
-
-
-// make three methods
-
+const NOTIFICATION_KEY = 'FlashCards:notification'
 export function clearLocalNotification() {
     return AsyncStorage.removeItem(NOTIFICATION_KEY)
         .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
-
-
 function createNotification() {
     return {
-        title: 'Life is what you make it!',
-        body: "Don't forget to revise today",
+        title: 'Note from Flash Card!',
+        body: "Don't forget to check today",
         ios: {
             sound: true,
         },
@@ -38,12 +31,10 @@ export function setLocalNotification() {
                     .then(({ status }) => {
                         if (status === 'granted') {
                             Notifications.cancelAllScheduledNotificationsAsync()
-
                             let tomorrow = new Data()
                             tomorrow.setDate(tomorrow.getDate() + 1)
                             tomorrow.setHours(15)
                             tomorrow.setMinutes(0)
-
                             Notifications.scheduleLocalNotificationAsync(
                                 createNotification(),
                                 {
@@ -51,7 +42,6 @@ export function setLocalNotification() {
                                     repeat: 'day'
                                 }
                             )
-
                             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify)
                         }
                     })

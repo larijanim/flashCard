@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         paddingRight: 60,
         marginBottom: 10,
         borderRadius: 12,
-        width: 300,
+       // width: 300,
         height: 300,
     },
     itemText: {
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
         borderWidth: 1,
         borderColor: '#fff',
-        width:150,
+       width:150,
     },
     title: {
         fontSize: 14,

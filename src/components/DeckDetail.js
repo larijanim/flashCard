@@ -98,11 +98,13 @@ const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: blue,
-        padding: 20,
-        paddingLeft: 60,
-        paddingRight: 60,
+        padding: 5,
+        paddingLeft: 15,
+        paddingRight: 5,
         marginBottom: 10,
         borderRadius: 12,
+        marginLeft:5,
+        marginRight:5,
         width: 300,
     },
     itemText: {
@@ -122,13 +124,13 @@ const styles = StyleSheet.create({
         marginTop:10,
         paddingTop:15,
         paddingBottom:15,
-        marginLeft:30,
-        marginRight:30,
+        marginLeft:25,
+        marginRight:25,
         backgroundColor:'#766b73',
         borderRadius:10,
         borderWidth: 1,
         borderColor: '#fff',
-        width:150,
+       // width:150,
     },
 
 

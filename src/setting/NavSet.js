@@ -9,15 +9,14 @@ import DeckNew from "../components/DeckNew";
 import Quiz from "../components/Quiz";
 import CardNew from "../components/CardNew";
 import { Entypo } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
 const ListStack=createStackNavigator();
 const AddStack =createStackNavigator();
 const MyTabs   =createBottomTabNavigator();
-//const AddCard  =createStackNavigator();
-//const Quiz  =createStackNavigator();
+
 
 const ListStackScreen = () => (
     <ListStack.Navigator
@@ -92,7 +91,8 @@ const AppTabsScreen = () => (
             component={NewDeckStackScreen}
             options={{
                 tabBarLabel: 'ADD Deck',
-                tabBarIcon: ({ color }) => <AntDesign name='pluscircle' size={20} color={color} />
+                tabBarIcon: ({ color }) => <MaterialCommunityIcons name="playlist-plus" size={20} color={color} />
+
 
 
             }}
