@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Button, Animated , TouchableWithoutFeedback} from 'react-native'
+import {View, Text, StyleSheet, Button, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/index'
 
@@ -27,7 +27,7 @@ class Deck extends React.Component {
         const { deck, navigation} = this.props
         const questionArr= deck[`questions`];
         const q_length=(questionArr== undefined )?0:questionArr.length;
-        //console.log("vvvvvv"+JSON.stringify(questionArr));
+
         return (
 
 

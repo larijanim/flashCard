@@ -8,33 +8,46 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 
-var scaleValue = new Animated.Value(1);
+var scaleValue = new Animated.Value(0);
 
-function scale() {
-    scaleValue.setValue(0);
-    Animated.timing(
-        scaleValue,
-        {
-            toValue: 3,
-            friction: 3,
-            tension: 40,
-            duration: 300,
-            useNativeDriver: true,
-            easing: Easing.easeOutBack
-        }
-    ).start();
 
-}
 
 const ScalingButton = (props) => {
 
     const buttonScale = scaleValue.interpolate({
         inputRange: [0, 0.5, 1],
-        outputRange: [1, 1.1, 1]
+        outputRange: [1, 1.1, 1.2]
     });
+    function getContent() {
+        if(props.children){
+            return props.children;
+        }
+        return <Text style={props.styles.label}>{ props.label }</Text>;
+    }
 
     return (
-        <TouchableWithoutFeedback onPress={onPress}>
+        <TouchableWithoutFeedback
+
+                                  onPressIn={() => {
+                                      scaleValue.setValue(0);
+                                      Animated.timing(scaleValue, {
+                                          toValue: 2,
+                                          duration: 250,
+                                          easing: Easing.linear,
+                                          useNativeDriver: true
+                                      }).start();
+
+                                      props.onPress();
+                                  }}
+                                  onPressOut={() => {
+                                      Animated.timing(scaleValue, {
+                                          toValue: 0,
+                                          duration: 100,
+                                          easing: Easing.linear,
+                                          useNativeDriver: true
+                                      }).start();
+                                  }}
+        >
             <Animated.View style={[
                 props.noDefaultStyles ? styles.default_button : styles.button,
                 props.styles ? props.styles.button : '',
@@ -50,17 +63,7 @@ const ScalingButton = (props) => {
         </TouchableWithoutFeedback>
     );
 
-    function getContent() {
-        if(props.children){
-            return props.children;
-        }
-        return <Text style={props.styles.label}>{ props.label }</Text>;
-    }
 
-    function onPress() {
-        scale();
-        props.onPress();
-    }
 
 }
 
