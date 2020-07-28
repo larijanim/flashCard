@@ -37,7 +37,7 @@ const ScalingButton = (props) => {
                                           useNativeDriver: true
                                       }).start();
 
-                                      props.onPress();
+
                                   }}
                                   onPressOut={() => {
                                       Animated.timing(scaleValue, {
@@ -46,6 +46,7 @@ const ScalingButton = (props) => {
                                           easing: Easing.linear,
                                           useNativeDriver: true
                                       }).start();
+                                      props.onPress();
                                   }}
         >
             <Animated.View style={[

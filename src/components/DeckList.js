@@ -24,7 +24,7 @@ class DeckList extends Component {
         const decksArr= Object.values(decks);
        // console.log("dddddd"+JSON.stringify(decks));
         return (
-            <ScrollView >
+            <View >
                 <Text style={styles.title}>LIST of DECKS</Text>
 
                 { decksArr.map((deck ,i) => {
@@ -34,7 +34,7 @@ class DeckList extends Component {
                     );
                 })}
 
-            </ScrollView>
+            </View>
         );
     }
 }
