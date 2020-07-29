@@ -9,11 +9,7 @@ import {
 } from 'react-native';
 
 var scaleValue = new Animated.Value(0);
-
-
-
 const ScalingButton = (props) => {
-
     const buttonScale = scaleValue.interpolate({
         inputRange: [0, 0.5, 1],
         outputRange: [1, 1.1, 1.2]
@@ -27,7 +23,6 @@ const ScalingButton = (props) => {
 
     return (
         <TouchableWithoutFeedback
-
                                   onPressIn={() => {
                                       scaleValue.setValue(0);
                                       Animated.timing(scaleValue, {

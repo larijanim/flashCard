@@ -22,7 +22,7 @@ class DeckList extends Component {
             return <Text style={styles.title}>No decks yet</Text>
         }
         const decksArr= Object.values(decks);
-       // console.log("dddddd"+JSON.stringify(decks));
+
         return (
             <View >
                 <Text style={styles.title}>LIST of DECKS</Text>

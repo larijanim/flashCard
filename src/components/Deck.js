@@ -17,11 +17,9 @@ class Deck extends React.Component {
         fadeValue: new Animated.Value(0)
     };
 
-
     componentDidMount() {
 
     }
-
 
     render() {
         const { deck, navigation} = this.props
@@ -29,8 +27,6 @@ class Deck extends React.Component {
         const q_length=(questionArr== undefined )?0:questionArr.length;
 
         return (
-
-
 
             <View style={styles.container}>
 
