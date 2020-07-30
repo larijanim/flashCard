@@ -1,26 +1,31 @@
-import { View, StyleSheet, AsyncStorage } from 'react-native'
+import {  AsyncStorage , Platform} from 'react-native'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions';
-const NOTIFICATION_KEY = 'FlashCards:notification'
+//import * as Notifications from 'expo-notifications';
+
+const NOTIFICATION_KEY = 'FlashCards:Notifications'
+
+
+
+
+
 export function clearLocalNotification() {
     return AsyncStorage.removeItem(NOTIFICATION_KEY)
         .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
-function createNotification() {
+export function createNotification() {
     return {
         title: 'Note from Flash Card!',
         body: "Don't forget to check today",
-        ios: {
-            sound: true,
-        },
+       // data: { data: 'goes here' },
         android: {
             sound: true,
             priority: 'high',
             sticky: false,
             vibrate: true,
-        }
-    }
-}
+        },
+    };
+};
 
 export function setLocalNotification() {
     AsyncStorage.getItem(NOTIFICATION_KEY)
@@ -33,7 +38,7 @@ export function setLocalNotification() {
                             Notifications.cancelAllScheduledNotificationsAsync()
                             let tomorrow = new Date()
                             tomorrow.setDate(tomorrow.getDate() + 1)
-                            tomorrow.setHours(15)
+                            tomorrow.setHours(20)
                             tomorrow.setMinutes(0)
                             Notifications.scheduleLocalNotificationAsync(
                                 createNotification(),
@@ -42,7 +47,7 @@ export function setLocalNotification() {
                                     repeat: 'day'
                                 }
                             )
-                            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify)
+                            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
                         }
                     })
             }

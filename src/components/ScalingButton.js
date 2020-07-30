@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 
-import {
-    StyleSheet,
-    Text,
-    Animated,
-    Easing,
-    TouchableWithoutFeedback
-} from 'react-native';
+import TouchableScale from "react-native-touchable-scale";
+import { StyleSheet, Text } from "react-native";
 
-var scaleValue = new Animated.Value(0);
+
 const ScalingButton = (props) => {
-    const buttonScale = scaleValue.interpolate({
-        inputRange: [0, 0.5, 1],
-        outputRange: [1, 1.1, 1.2]
-    });
+
+
     function getContent() {
         if(props.children){
             return props.children;
@@ -22,41 +15,13 @@ const ScalingButton = (props) => {
     }
 
     return (
-        <TouchableWithoutFeedback
-                                  onPressIn={() => {
-                                      scaleValue.setValue(0);
-                                      Animated.timing(scaleValue, {
-                                          toValue: 2,
-                                          duration: 250,
-                                          easing: Easing.linear,
-                                          useNativeDriver: true
-                                      }).start();
-
-
-                                  }}
-                                  onPressOut={() => {
-                                      Animated.timing(scaleValue, {
-                                          toValue: 0,
-                                          duration: 100,
-                                          easing: Easing.linear,
-                                          useNativeDriver: true
-                                      }).start();
-                                      props.onPress();
-                                  }}
+        <TouchableScale
+            style={styles.button}
+            onPress={props.onPress}
+            activeScale={0.7}
         >
-            <Animated.View style={[
-                props.noDefaultStyles ? styles.default_button : styles.button,
-                props.styles ? props.styles.button : '',
-                {
-                    transform: [
-                        {scale: buttonScale}
-                    ]
-                }
-            ]}
-            >
-                { getContent() }
-            </Animated.View>
-        </TouchableWithoutFeedback>
+            {getContent()}
+        </TouchableScale>
     );
 
 
@@ -74,8 +39,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 20,
         borderWidth: 1,
-        borderColor: '#eee',
-        margin: 20
+        borderColor: '#2e36d2',
+        margin: 20,
+        backgroundColor:'#2506d2',
+        borderRadius:10,
     },
 });
 

@@ -14,20 +14,21 @@
     "@react-navigation/stack": "^5.7.0",
     "dev-tools": "^0.1.6",
     "expo": "~38.0.8",
+    "expo-screen-orientation": "~1.1.1",
     "expo-status-bar": "^1.0.2",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-gesture-handler": "^1.5.3",
     "react-native-screens": "^2.9.0",
+    "react-native-touchable-scale": "^2.1.1",
     "react-native-web": "~0.11.7",
     "react-redux": "^7.2.0",
     "react_redux": "^1.2.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "thunk": "0.0.1",
-    "expo-screen-orientation": "~1.1.1"
+    "thunk": "0.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
